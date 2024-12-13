@@ -132,7 +132,9 @@ int main(int argc, char *argv[]) {
 
   // upload source buffer
   std::cout << "upload source buffer" << std::endl;
-  RT_CHECK(vx_copy_to_dev(src_buffer, h_src.data(), 0, buf_size));
+  RT_CHECK(vx_copy_to_cmd_queue(src_buffer, h_src.data(), 0, buf_size));
+  RT_CHECK(vx_flush(device, kernel_arg.src_addr));
+
 
   // upload program
   std::cout << "upload program" << std::endl;
